@@ -13,13 +13,13 @@ class Manage {
 
     public void produce(int product) throws InterruptedException {
         producerSemaphore.acquire();
-        System.out.println("Producer Added item:" + product);
+        System.out.println("Producer produced: " + product);
         consumerSemaphore.release();
     }
 
     public void consume(int product) throws InterruptedException {
         consumerSemaphore.acquire();
-        System.out.println("Consumer Took item: " + product);
+        System.out.println("Consumer consumed: " + product);
         producerSemaphore.release();
     }
 }
