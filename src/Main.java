@@ -1,19 +1,19 @@
 public class Main {
     public static void main(String[] args) {
-        int manageCapacity = 2;
-        int totalProducts = 10;
-        int totalProducers = 3;
-        int totalConsumers = 4; 
+        int capacity = 3;
+        int totalItems = 10;
+        int producersCount = 3;
+        int consumersCount = 2;
 
-        Manage manage = new Manage(manageCapacity);
+        Storage storage = new Storage(capacity);
 
-        for (int i = 0; i < totalProducers; i++) {
-            Thread producerThread = new Thread(new Producer(manage, totalProducts));
+        for (int i = 0; i < producersCount; i++) {
+            Thread producerThread = new Thread(new Producer(storage, totalItems, i + 1), "Producer " + (i + 1));
             producerThread.start();
         }
-        
-        for (int i = 0; i < totalConsumers; i++) {
-            Thread consumerThread = new Thread(new Consumer(manage, totalProducts));
+
+        for (int i = 0; i < consumersCount; i++) {
+            Thread consumerThread = new Thread(new Consumer(storage, totalItems * producersCount), "Consumer " + (i + 1));
             consumerThread.start();
         }
     }
